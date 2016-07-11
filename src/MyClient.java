@@ -37,46 +37,46 @@ public class MyClient {
 			}
 
 			// test A* on bot 0
-			float botx = network.getX(myPlayerNumber, 0);
-			float boty = network.getY(myPlayerNumber, 0);
+			int botx = (int) network.getX(myPlayerNumber, 0);
+			int boty = (int) network.getY(myPlayerNumber, 0);
 			if (firstPath.isEmpty()) {
-				firstPath = AStar.findPath(board, board.board[Math.round(botx)][Math.round(boty)],
+				firstPath = AStar.findPath(board, board.board[botx][boty],
 						board.board[randomWalkableX][randomWalkableY]);
 			} else {
 				float xDir = firstPath.get(0).x - botx;
 				float yDir = firstPath.get(0).y - boty;
 				network.setMoveDirection(0, xDir, yDir);
-				if (firstPath.get(0).x == Math.round(botx) && firstPath.get(0).y == Math.round(boty)) {
+				if (firstPath.get(0).x == botx && firstPath.get(0).y == boty) {
 					firstPath.remove(0);
 				}
 			}
 			
 			// test A* on bot 1
-			botx = Math.round(network.getX(myPlayerNumber, 1));
-			boty = Math.round(network.getY(myPlayerNumber, 1));
+			botx = (int)  network.getX(myPlayerNumber, 1);
+			boty = (int) network.getY(myPlayerNumber, 1);
 			if (secondPath.isEmpty()) {
-				secondPath = AStar.findPath(board, board.board[Math.round(botx)][Math.round(boty)],
+				secondPath = AStar.findPath(board, board.board[botx][boty],
 						board.board[randomWalkableX][randomWalkableY]);
 			} else {
 				float xDir = secondPath.get(0).x - botx;
 				float yDir = secondPath.get(0).y - boty;
 				network.setMoveDirection(1, xDir, yDir);
-				if (secondPath.get(0).x == Math.round(botx) && secondPath.get(0).y == Math.round(boty)) {
+				if (secondPath.get(0).x == botx && secondPath.get(0).y == boty) {
 					secondPath.remove(0);
 				}
 			}
 			
 			// test A* on bot 2
-			botx = Math.round(network.getX(myPlayerNumber, 2));
-			boty = Math.round(network.getY(myPlayerNumber, 2));
+			botx = (int) network.getX(myPlayerNumber, 2);
+			boty = (int) network.getY(myPlayerNumber, 2);
 			if (thirdPath.isEmpty()) {
-				thirdPath = AStar.findPath(board, board.board[Math.round(botx)][Math.round(boty)],
+				thirdPath = AStar.findPath(board, board.board[botx][boty],
 						board.board[randomWalkableX][randomWalkableY]);
 			} else {
 				float xDir = thirdPath.get(0).x - botx;
 				float yDir = thirdPath.get(0).y - boty;
 				network.setMoveDirection(2, xDir, yDir);
-				if (thirdPath.get(0).x == Math.round(botx) && thirdPath.get(0).y == Math.round(boty)) {
+				if (thirdPath.get(0).x == botx && thirdPath.get(0).y == boty) {
 					thirdPath.remove(0);
 				}
 			}
