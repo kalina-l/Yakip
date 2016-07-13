@@ -1,18 +1,20 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import lenz.htw.yakip.net.NetworkClient;
+
 public class Bot {
 	
 	private ArrayList<Node> path;
-	public int x;
-	public int y;
+	public int id;
+	public float x;
+	public float y;
 	
 	public ArrayList<Node> getPath(){
 		return path;
 	}
 	
 	public Bot(){
-		
 	}
 	
 	public void findPath(Board board){
@@ -36,5 +38,10 @@ public class Bot {
 		randomWalkableX += 5;
 		randomWalkableY += 5;
 		return board.board[randomWalkableX][randomWalkableY];
+	}
+	
+	public void updatePosition(NetworkClient network, int myPlayerNumber){
+		x = network.getX(myPlayerNumber, id);
+		y = network.getY(myPlayerNumber, id);
 	}
 }

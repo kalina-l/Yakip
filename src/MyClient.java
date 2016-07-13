@@ -15,20 +15,11 @@ public class MyClient {
 		NetworkClient network = new NetworkClient(null, "CPU");
 		myPlayerNumber = network.getMyPlayerNumber();
 		
-		ArrayList<Node> firstPath = new ArrayList<Node>();
-		ArrayList<Node> secondPath = new ArrayList<Node>();
-		ArrayList<Node> thirdPath = new ArrayList<Node>();
+		ArrayList<Bot> bots = new ArrayList<>();
+		bots.add(new BotScout());
+		bots.add(new BotSoldier());
+		bots.add(new BotTank());
 		
-		Random rnd = new Random();
-		int randomWalkableX = rnd.nextInt(17);
-		int randomWalkableY = rnd.nextInt(17);
-		while (network.isWall(randomWalkableX + 5, randomWalkableY + 5)) {
-			randomWalkableX = rnd.nextInt(17);
-			randomWalkableY = rnd.nextInt(17);
-		}
-		randomWalkableX += 5;
-		randomWalkableY += 5;
-		System.out.println(randomWalkableX + ", " + randomWalkableY);
 
 		while (network.isAlive()) {
 			if (!loaded) {
@@ -36,7 +27,11 @@ public class MyClient {
 				loaded = true;
 			}
 
-			// test A* on bot 0
+			foreach(Bot currBot : bots){
+				
+			}
+			
+			// bot 0 - Scout
 			int botx = (int) network.getX(myPlayerNumber, 0);
 			int boty = (int) network.getY(myPlayerNumber, 0);
 			if (firstPath.isEmpty()) {

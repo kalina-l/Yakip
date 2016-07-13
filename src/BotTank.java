@@ -1,7 +1,12 @@
 
 public class BotTank extends Bot {
 
-	public void findPath(){
-		super.findPath();
+	public BotTank(){
+		super();
+		id = 2;
+	}
+	
+	public void findPath(Board board){
+		super.findPath(board);
 	}
 }
