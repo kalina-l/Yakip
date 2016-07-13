@@ -27,8 +27,12 @@ public class MyClient {
 				loaded = true;
 			}
 
-			foreach(Bot currBot : bots){
-				
+			for(Bot currBot : bots){
+				currBot.updatePosition(network, myPlayerNumber);
+				if (currBot.isEmpty()) {
+					firstPath = AStar.findPath(board, board.board[botx][boty],
+							board.board[randomWalkableX][randomWalkableY]);
+				}
 			}
 			
 			// bot 0 - Scout
