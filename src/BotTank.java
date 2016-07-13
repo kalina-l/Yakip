@@ -1,4 +1,7 @@
 
-public class BotTank extends Tank {
+public class BotTank extends Bot {
 
+	public void findPath(){
+		super.findPath();
+	}
 }
