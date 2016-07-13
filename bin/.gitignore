@@ -3,3 +3,8 @@
 /IHeapItem.class
 /HeapItem.class
 /Node.class
+/IBot.class
+/Bot.class
+/BotScout.class
+/BotSoldier.class
+/BotTank.class

@@ -14,11 +14,12 @@ public final class AStar {
 
 		while (openSet.Count() > 0) {
 			Node currentNode = openSet.RemoveFirst();
-			closedSet.add(currentNode);
 
 			if (currentNode == targetNode) {
 				return retracePath(startNode, targetNode);
 			}
+			
+			closedSet.add(currentNode);
 
 			for (Node neighbour : board.getSideNeighbours(currentNode)) {
 				if (neighbour.isWall() || closedSet.contains(neighbour)) {
