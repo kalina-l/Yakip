@@ -15,6 +15,7 @@ public class Bot {
 	}
 	
 	public Bot(){
+		path = new ArrayList<Node>();
 	}
 	
 	public void findPath(Board board){
@@ -23,7 +24,7 @@ public class Bot {
 		
 		Node dest = findDestination(board);
 		
-		AStar.findPath(board, board.board[xFull][yFull],
+		path = AStar.findPath(board, board.board[xFull][yFull],
 				board.board[dest.x][dest.y]);
 	}
 	
