@@ -29,54 +29,16 @@ public class MyClient {
 
 			for(Bot currBot : bots){
 				currBot.updatePosition(network, myPlayerNumber);
-				if (currBot.isEmpty()) {
-					firstPath = AStar.findPath(board, board.board[botx][boty],
-							board.board[randomWalkableX][randomWalkableY]);
+				if (currBot.getPath().isEmpty()) {
+					currBot.findPath(board);
 				}
-			}
-			
-			// bot 0 - Scout
-			int botx = (int) network.getX(myPlayerNumber, 0);
-			int boty = (int) network.getY(myPlayerNumber, 0);
-			if (firstPath.isEmpty()) {
-				firstPath = AStar.findPath(board, board.board[botx][boty],
-						board.board[randomWalkableX][randomWalkableY]);
-			} else {
-				float xDir = firstPath.get(0).x - botx;
-				float yDir = firstPath.get(0).y - boty;
-				network.setMoveDirection(0, xDir, yDir);
-				if (firstPath.get(0).x == botx && firstPath.get(0).y == boty) {
-					firstPath.remove(0);
-				}
-			}
-			
-			// test A* on bot 1
-			botx = (int)  network.getX(myPlayerNumber, 1);
-			boty = (int) network.getY(myPlayerNumber, 1);
-			if (secondPath.isEmpty()) {
-				secondPath = AStar.findPath(board, board.board[botx][boty],
-						board.board[randomWalkableX][randomWalkableY]);
-			} else {
-				float xDir = secondPath.get(0).x - botx;
-				float yDir = secondPath.get(0).y - boty;
-				network.setMoveDirection(1, xDir, yDir);
-				if (secondPath.get(0).x == botx && secondPath.get(0).y == boty) {
-					secondPath.remove(0);
-				}
-			}
-			
-			// test A* on bot 2
-			botx = (int) network.getX(myPlayerNumber, 2);
-			boty = (int) network.getY(myPlayerNumber, 2);
-			if (thirdPath.isEmpty()) {
-				thirdPath = AStar.findPath(board, board.board[botx][boty],
-						board.board[randomWalkableX][randomWalkableY]);
-			} else {
-				float xDir = thirdPath.get(0).x - botx;
-				float yDir = thirdPath.get(0).y - boty;
-				network.setMoveDirection(2, xDir, yDir);
-				if (thirdPath.get(0).x == botx && thirdPath.get(0).y == boty) {
-					thirdPath.remove(0);
+				else{
+					float xDir = currBot.getPath().get(0).x - currBot.x;
+					float yDir = currBot.getPath().get(0).y - currBot.y;
+					network.setMoveDirection(0, xDir, yDir);
+					if (currBot.getPath().get(0).x == currBot.x && currBot.getPath().get(0).y == currBot.y) {
+						currBot.getPath().remove(0);
+					}
 				}
 			}
 			
