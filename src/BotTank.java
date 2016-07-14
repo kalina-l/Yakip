@@ -14,16 +14,20 @@ public class BotTank extends Bot {
 		
 		int value = 0;
 		
-		if(node.isWall()){
+		if(Math.abs(node.x - (int)x) > 10 || Math.abs(node.y - (int)y) > 10)
+			value -= 10;
+		
+		if(node.unreachable){
+			return -99;
+		}
+		else if(node.isWall()){
 			value -= 15;
 		}
-		
-		if(node.value != playerID){
+		else if(node.value != playerID){
 			value += 15;
 		}
 		
-		if(node.unreachable)
-			return -99;
+		
 		
 		//override this
 		return value;
