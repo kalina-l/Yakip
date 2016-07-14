@@ -48,6 +48,9 @@ public class BotScout extends Bot{
 		
 		int value = 0;
 		
+		ArrayList<Node> path = AStar.findPath(board, board.board[(int)x][(int)y],
+				board.board[node.x][node.y], false);
+		
 		if(node.unreachable) {
 			return -40;
 		}
@@ -55,10 +58,6 @@ public class BotScout extends Bot{
 			//value -= 5;
 		} 
 		else if(node.value != playerID){
-			
-			ArrayList<Node> path = AStar.findPath(board, board.board[(int)x][(int)y],
-					board.board[node.x][node.y], false);
-			
 			
 			value += 10 - path.size();
 			
@@ -86,7 +85,7 @@ public class BotScout extends Bot{
 			}
 			else
 			{
-				value = -10;
+				value = -10 - path.size();
 			}
 		}
 		

@@ -29,16 +29,24 @@ public class BotTank extends Bot {
 		else if(node.isWall()){
 			//value -= 15;
 		}
-		else if(node.value != playerID){
-			value += 15;
+		else {
+			if(node.value != playerID) {
+		
+				value += 15;
+				
+				
+			
+				if(node.y == (int)y){
+					value += 15;
+				}
+			}
+			else{
+				value -= 10;
+			}
 			
 			for(Node neighbor : board.getSideNeighbours(node)) {
 				if(neighbor.isWall())
 					value -= 5;
-			}
-		
-			if(node.y == (int)y){
-				value += 15;
 			}
 			
 			for(int i=0; i<4; i++) {
