@@ -13,7 +13,7 @@ public class MyClient {
 
 	public static void main(String args[]) {
 		NetworkClient network = new NetworkClient(null, "CPU");
-		myPlayerNumber = network.getMyPlayerNumber();
+		myPlayerNumber = network.getMyPlayerNumber(); 
 		
 		ArrayList<Bot> bots = new ArrayList<>();
 		BotScout botScout = new BotScout(myPlayerNumber, network);

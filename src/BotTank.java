@@ -35,7 +35,7 @@ public class BotTank extends Bot {
 				value += 15;
 				
 				if(node.value == board.getWinnerID()){
-					value += 30;
+					value += 15;
 				}
 				
 				if(node.value == 4)

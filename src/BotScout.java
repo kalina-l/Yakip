@@ -55,21 +55,20 @@ public class BotScout extends Bot{
 			return -40;
 		}
 		else if(node.isWall()) {
-			//value -= 5;
+			value += 40;
 		} 
 		else if(node.value != playerID){
 			
-			value += 10 - path.size();
+			value += 5 - path.size()*2;
 			
-			value += 15;
-			
-			if(node.value == board.getWinnerID()){
-				value += 10;
+			boolean walled = false;
+			for(Node neighbor : board.getNeighbours(node)) {
+				if(neighbor.isWall())
+					walled = true;
 			}
 			
-			for(Node neighbor : board.getSideNeighbours(node)) {
-				if(neighbor.isWall())
-					value += 15;
+			if(walled){
+				value += 25; 
 			}
 			
 			for(int i=0; i<4; i++) {
