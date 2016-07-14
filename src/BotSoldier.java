@@ -13,7 +13,7 @@ public class BotSoldier extends Bot{
 	}
 	
 	public void findPath(Board board){
-		super.findPath(board);
+		super.findPath(board, false);
 	}
 	
 public int getNodeValue(Node node){
@@ -53,4 +53,21 @@ public int getNodeValue(Node node){
 		//override this
 		return value;
 	}
+
+public float[] move(Board board){
+	float[] direction = new float[2];
+	
+	if (getPath().isEmpty()) {
+		this.findPath(board);
+	}
+	else{
+		direction[0] = getPath().get(0).x + 0.5f - x;
+		direction[1] = getPath().get(0).y + 0.5f - y;
+
+		if (getPath().get(0).x == (int) x && getPath().get(0).y == (int) y) {
+			getPath().remove(0);
+		}
+	}
+	return direction;
+}
 }

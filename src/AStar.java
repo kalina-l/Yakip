@@ -7,7 +7,7 @@ public final class AStar {
 	private AStar() {
 	}
 
-	public static ArrayList<Node> findPath(Board board, Node startNode, Node targetNode) {
+	public static ArrayList<Node> findPath(Board board, Node startNode, Node targetNode, boolean focusHorizontal) {
 		Heap<Node> openSet = new Heap<Node>(Node.class, board.board[0].length * board.board[1].length);
 		HashSet<Node> closedSet = new HashSet<Node>();
 		openSet.Add(startNode);
@@ -25,10 +25,10 @@ public final class AStar {
 				if (neighbour.isWall() || closedSet.contains(neighbour)) {
 					continue;
 				}
-				int newMovementCostToNeighbour = currentNode.gCost + getDistance(currentNode, neighbour);
+				int newMovementCostToNeighbour = currentNode.gCost + getDistance(currentNode, neighbour, focusHorizontal);
 				if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)) {
 					neighbour.gCost = newMovementCostToNeighbour;
-					neighbour.hCost = getDistance(neighbour, targetNode);
+					neighbour.hCost = getDistance(neighbour, targetNode, focusHorizontal);
 					neighbour.parentNode = currentNode;
 					if (openSet.Contains(neighbour))
 						openSet.SortUp(neighbour);
@@ -56,14 +56,16 @@ public final class AStar {
 		return path;
 	}
 
-	private static int getDistance(Node nodeA, Node nodeB) {
+	private static int getDistance(Node nodeA, Node nodeB, boolean focusHorizontal) {
 		// Manhattan
 		// int dstX = Math.abs(nodeA.x - nodeB.x);
 		// int dstY = Math.abs(nodeA.y - nodeB.y);
 		// return dstX + dstY;+
+		int multiplicator = 1;
+		if(focusHorizontal) multiplicator = 3;
 
 		// Euclidean
-		return (int) Math.round(
+		return multiplicator * (int) Math.round(
 				Math.sqrt((nodeB.y - nodeA.y) * (nodeB.y - nodeA.y) + (nodeB.x - nodeA.x) * (nodeB.x - nodeA.x)));
 	}
 }

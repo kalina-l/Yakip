@@ -22,6 +22,10 @@ public class Bot {
 	}
 	
 	public void findPath(Board board){
+		findPath(board, false);
+	}
+	
+	public void findPath(Board board, boolean focusHorizontal){
 		int xFull = (int) x;
 		int yFull = (int) y;
 		
@@ -32,7 +36,7 @@ public class Bot {
 			Node dest = findDestination(board);
 			
 			path = AStar.findPath(board, board.board[xFull][yFull],
-					board.board[dest.x][dest.y]);
+					board.board[dest.x][dest.y], focusHorizontal);
 		}
 	}
 	
@@ -139,26 +143,16 @@ public class Bot {
 	}
 	
 	public float[] move(Board board){
-		float[] direction = new float[2];
-		// TODO Tank soll immer an der Seitenkante seines Pfades laufen
-		// TODO Scout soll immer warten
-		// Rest läuft einfach mittig
-		
-		if (getPath().isEmpty()) {
-			if(this instanceof BotScout){
-				((BotScout)this).findPath(board);
-			}
-			else findPath(board);
+		if(this instanceof BotTank){
+			return ((BotTank)this).move(board);
 		}
-		else{
-			direction[0] = path.get(0).x + 0.5f - x;
-			direction[1] = path.get(0).y + 0.5f - y;
-
-			if (path.get(0).x == (int) x && path.get(0).y == (int) y) {
-				path.remove(0);
-			}
+		if(this instanceof BotScout){
+			return ((BotScout)this).move(board);
 		}
-		return direction;
+		if(this instanceof BotSoldier){
+			return ((BotSoldier)this).move(board);
+		}
+		return null;
 	}
 	
 	public void updatePosition(NetworkClient network, int myPlayerNumber){

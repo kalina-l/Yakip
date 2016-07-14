@@ -18,12 +18,24 @@ public class BotScout extends Bot{
 	public void findPath(Board board){
 		this.board = board;
 		if(!waiting)
-			super.findPath(board);
+			super.findPath(board, false);
 	}
 	
 	public float[] move(Board board){
-		float[] direction = super.move(board);
-		if(getPath().isEmpty())	waiting = true;
+		float[] direction = new float[2];
+		
+		if (getPath().isEmpty()) {
+			this.findPath(board);
+			waiting = true;
+		}
+		else{
+			direction[0] = getPath().get(0).x + 0.5f - x;
+			direction[1] = getPath().get(0).y + 0.5f - y;
+
+			if (getPath().get(0).x == (int) x && getPath().get(0).y == (int) y) {
+				getPath().remove(0);
+			}
+		}
 		return direction;
 	}
 	
