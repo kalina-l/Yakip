@@ -15,6 +15,7 @@ public class Bot {
 	}
 	
 	public Bot(){
+		path = new ArrayList<Node>();
 	}
 	
 	public void findPath(Board board){
@@ -106,6 +107,7 @@ public class Bot {
 		}
 		
 		return bestNode;
+		
 		/*
 		Random rnd = new Random();
 		int randomWalkableX = rnd.nextInt(17);
@@ -118,8 +120,6 @@ public class Bot {
 		randomWalkableY += 5;
 		return board.board[randomWalkableX][randomWalkableY];
 		*/
-		
-		
 	}
 	
 	public void updatePosition(NetworkClient network, int myPlayerNumber){
