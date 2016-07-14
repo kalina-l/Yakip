@@ -30,7 +30,7 @@ public class Bot {
 		{
 			Node dest = findDestination(board);
 			
-			AStar.findPath(board, board.board[xFull][yFull],
+			path = AStar.findPath(board, board.board[xFull][yFull],
 					board.board[dest.x][dest.y]);
 		}
 	}
@@ -55,8 +55,6 @@ public class Bot {
 						for(int y=0; y<fieldWidth;y++){
 							int xPos = i*fieldWidth/2 + x;
 							int yPos = j*fieldWidth/2 + y;
-							
-								
 							
 							tempField[x][y] = field[xPos][yPos];
 							tempValue += getNodeValue(field[xPos][yPos]);

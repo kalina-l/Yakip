@@ -36,7 +36,9 @@ public class MyClient {
 					float xDir = currBot.getPath().get(0).x + 0.5f - currBot.x;
 					float yDir = currBot.getPath().get(0).y + 0.5f - currBot.y;
 					network.setMoveDirection(currBot.id, xDir, yDir);
-					if (currBot.getPath().get(0).x + 0.5f == currBot.x && currBot.getPath().get(0).y == currBot.y) {
+
+					//System.out.println("x: " + currBot.getPath().get(0).x + ", y: " + currBot.getPath().get(0).y);
+					if (currBot.getPath().get(0).x == (int) currBot.x && currBot.getPath().get(0).y == (int) currBot.y) {
 						currBot.getPath().remove(0);
 					}
 				}
