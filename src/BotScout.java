@@ -52,36 +52,13 @@ public class BotScout extends Bot{
 				board.board[node.x][node.y], false);
 		
 		if(node.unreachable) {
-			return -40;
+			//return -40;
 		}
 		else if(node.isWall()) {
 			value += 40;
-		} 
-		else if(node.value != playerID){
-			
-			value += 5 - path.size()*2;
-			
-			boolean walled = false;
-			for(Node neighbor : board.getNeighbours(node)) {
-				if(neighbor.isWall())
-					walled = true;
-			}
-			
-			if(walled){
-				value += 25; 
-			}
-			
-			for(int i=0; i<4; i++) {
-				if(i != playerID) {
-					for(int j=0; j<3; j++){
-						if((int)network.getX(i, j) == node.x && (int)network.getY(i, j) == node.y){
-							value -= 50;
-						}
-					}
-				}
-			}
 		}
-		else{
+		else if(node.value == playerID){
+			/*
 			if(node.x == (int)x && node.y == (int)y)
 			{
 				value = -60;
@@ -90,6 +67,40 @@ public class BotScout extends Bot{
 			{
 				value = -10 - path.size();
 			}
+			*/
+		}
+		else if(node.value != playerID){
+			
+			value += 55 - (path.size()*3);
+			
+			//if(node.value == 4)
+			//	value += 20;
+			
+			boolean walled = false;
+			for(Node neighbor : board.getNeighbours(node)) {
+				if(neighbor.isWall())
+					walled = true;
+			}
+			
+			if(walled){
+				value += 20;
+				
+				if(node.value == board.getThreatID(playerID)){
+					value += 30;
+				}
+			}
+			
+			
+			for(int i=0; i<4; i++) {
+				if(i != playerID) {
+					for(int j=0; j<3; j++){
+						if((int)network.getX(i, j) == node.x && (int)network.getY(i, j) == node.y){
+							value -= 200;
+						}
+					}
+				}
+			}
+			
 		}
 		
 		//override this

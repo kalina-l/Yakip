@@ -37,7 +37,7 @@ public int getNodeValue(Node node){
 			
 			if(node.value != 4){
 				
-				if(node.value == board.getWinnerID()){
+				if(node.value == board.getThreatID(playerID)){
 					value += 30;
 				}
 				

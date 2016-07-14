@@ -80,4 +80,20 @@ public class Board {
 		
 		return bestIndex;
 	}
+	
+	public int getThreatID(int myID){
+		int bestScore = -100;
+		int bestIndex = 0;
+		
+		for(int i=0; i < playerScore.length; i++){
+			if(i != myID){
+				if(playerScore[i] > bestScore){
+					bestScore = playerScore[i];
+					bestIndex = i;
+				}
+			}
+		}
+		
+		return bestIndex;
+	}
 }

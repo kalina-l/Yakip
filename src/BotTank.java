@@ -34,7 +34,7 @@ public class BotTank extends Bot {
 		
 				value += 15;
 				
-				if(node.value == board.getWinnerID()){
+				if(node.value == board.getThreatID(playerID)){
 					value += 15;
 				}
 				
@@ -46,7 +46,7 @@ public class BotTank extends Bot {
 				}
 			}
 			else{
-				value -= 10;
+				value -= 30;
 			}
 			
 			for(Node neighbor : board.getSideNeighbours(node)) {
@@ -58,7 +58,7 @@ public class BotTank extends Bot {
 				if(i != playerID) {
 					for(int j=0; j<3; j++){
 						if((int)network.getX(i, j) == node.x && (int)network.getY(i, j) == node.y){
-							value -= 20;
+							value -= 200;
 						}
 					}
 				}
@@ -80,10 +80,18 @@ public class BotTank extends Bot {
 		else{
 			direction[0] = getPath().get(0).x + 0.5f - x;
 			direction[1] = getPath().get(0).y + 0.5f - y;
+			
+			/*
+			if(Math.abs(direction[0]) < 0.2f && Math.abs(direction[1]) < 0.2f){
+				getPath().remove(0);
+			}
+			*/
 
+			
 			if (getPath().get(0).x == (int) x && getPath().get(0).y == (int) y) {
 				getPath().remove(0);
 			}
+			
 		}
 		return direction;
 	}
