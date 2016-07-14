@@ -33,10 +33,11 @@ public class MyClient {
 					currBot.findPath(board);
 				}
 				else{
-					float xDir = currBot.getPath().get(0).x - currBot.x;
-					float yDir = currBot.getPath().get(0).y - currBot.y;
-					network.setMoveDirection(0, xDir, yDir);
-					if (currBot.getPath().get(0).x == currBot.x && currBot.getPath().get(0).y == currBot.y) {
+					float xDir = currBot.getPath().get(0).x + 0.5f - currBot.x;
+					float yDir = currBot.getPath().get(0).y + 0.5f - currBot.y;
+					network.setMoveDirection(currBot.id, xDir, yDir);
+					//System.out.println("x: " + currBot.getPath().get(0).x + ", y: " + currBot.getPath().get(0).y);
+					if (currBot.getPath().get(0).x == (int) currBot.x && currBot.getPath().get(0).y == (int) currBot.y) {
 						currBot.getPath().remove(0);
 					}
 				}
