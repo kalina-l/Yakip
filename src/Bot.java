@@ -128,6 +128,12 @@ public class Bot {
 		*/
 	}
 	
+	public int[] move(){
+		int[] direction = new int[2];
+		
+		return direction;
+	}
+	
 	public void updatePosition(NetworkClient network, int myPlayerNumber){
 		x = network.getX(myPlayerNumber, id);
 		y = network.getY(myPlayerNumber, id);
