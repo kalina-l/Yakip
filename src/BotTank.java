@@ -41,6 +41,9 @@ public class BotTank extends Bot {
 				value += 15;
 			}
 			
+			if(node.value == 4)
+				value += 20;
+			
 			for(int i=0; i<4; i++) {
 				if(i != playerID) {
 					for(int j=0; j<3; j++){
