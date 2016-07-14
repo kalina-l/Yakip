@@ -8,12 +8,14 @@ public class BotScout extends Bot{
 	private Board board;
 	private NetworkClient network;
 	private int playerID;
+	private Timer timer;
 	
 	public BotScout(int playerID, NetworkClient network){
 		super(playerID);
 		id = 0;
 		this.network = network;
 		this.playerID = playerID;
+		timer = new Timer(this);
 	}
 	
 	public void findPath(Board board){
@@ -28,6 +30,8 @@ public class BotScout extends Bot{
 		if (getPath().isEmpty()) {
 			this.findPath(board);
 			waiting = true;
+			timer.start();
+			
 		}
 		else{
 			direction[0] = getPath().get(0).x + 0.5f - x;
@@ -45,10 +49,10 @@ public class BotScout extends Bot{
 		int value = 0;
 		
 		if(node.unreachable) {
-			return -99;
+			return -40;
 		}
 		else if(node.isWall()) {
-			value -= 5;
+//			value -= 5;
 		} 
 		else if(node.value != playerID){
 			
@@ -56,7 +60,7 @@ public class BotScout extends Bot{
 					board.board[node.x][node.y], false);
 			
 			if(path.size() > 6)
-				value -= 15;
+				value -= 50;
 			
 			value += 15;
 			
@@ -69,7 +73,7 @@ public class BotScout extends Bot{
 				if(i != playerID) {
 					for(int j=0; j<3; j++){
 						if((int)network.getX(i, j) == node.x && (int)network.getY(i, j) == node.y){
-							value -= 30;
+							value -= 50;
 						}
 					}
 				}
@@ -78,5 +82,30 @@ public class BotScout extends Bot{
 		
 		//override this
 		return value;
+	}
+}
+
+class Timer implements Runnable {
+	private Thread t;
+	private BotScout botScout;
+
+	public Timer(BotScout botScout) {
+		this.botScout = botScout;
+	}
+
+	public void run() {
+		try {
+			Thread.sleep(1000); // make a force-move if 4,5 sec have passed
+			botScout.waiting = false;
+		} catch (InterruptedException e) {
+			System.out.println("Timer interrupted");
+		}
+	}
+
+	public void start() {
+		if (t == null) {
+			t = new Thread(this, "Timer");
+			t.start();
+		}
 	}
 }

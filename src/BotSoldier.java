@@ -25,10 +25,10 @@ public int getNodeValue(Node node){
 		
 		
 		if(node.unreachable) {
-			return -99;
+			return -40;
 		}
 		else if(node.isWall()) {
-			value -= 15;
+			value -= 5;
 		} 
 		else if(node.value != playerID){
 			
