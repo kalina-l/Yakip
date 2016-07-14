@@ -28,7 +28,7 @@ public int getNodeValue(Node node){
 			return -99;
 		}
 		else if(node.isWall()) {
-			value -= 15;
+			//value -= 15;
 		} 
 		else if(node.value != playerID){
 			

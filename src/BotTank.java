@@ -24,10 +24,10 @@ public class BotTank extends Bot {
 		int value = 0;
 		
 		if(node.unreachable){
-			return -99;
+			return -40;
 		}
 		else if(node.isWall()){
-			value -= 15;
+			//value -= 15;
 		}
 		else if(node.value != playerID){
 			value += 15;

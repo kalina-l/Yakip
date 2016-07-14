@@ -48,7 +48,7 @@ public class BotScout extends Bot{
 			return -99;
 		}
 		else if(node.isWall()) {
-			value -= 5;
+			//value -= 5;
 		} 
 		else if(node.value != playerID){
 			
