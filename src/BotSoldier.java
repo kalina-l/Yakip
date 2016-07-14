@@ -1,9 +1,11 @@
 import lenz.htw.yakip.net.NetworkClient;
+import java.util.ArrayList;
 
 public class BotSoldier extends Bot{
 	
 	private NetworkClient network;
 	private int playerID;
+	private Board board;
 
 	public BotSoldier(int playerID, NetworkClient network){
 		super(playerID);
@@ -13,6 +15,7 @@ public class BotSoldier extends Bot{
 	}
 	
 	public void findPath(Board board){
+		this.board = board;
 		super.findPath(board, false);
 	}
 	
@@ -20,8 +23,6 @@ public int getNodeValue(Node node){
 		
 		int value = 0;
 		
-		if(Math.abs(node.x - (int)x) > 9 || Math.abs(node.y - (int)y) > 9)
-			value -= 10;
 		
 		if(node.unreachable) {
 			return -99;
@@ -36,9 +37,11 @@ public int getNodeValue(Node node){
 			if(node.value != 4){
 				value += 5;
 				
-				if(Math.abs(node.x - (int)x) < 4 || Math.abs(node.y - (int)y) > 4) {
-					value += 15;
-				}
+				ArrayList<Node> path = AStar.findPath(board, board.board[(int)x][(int)y],
+						board.board[node.x][node.y], false);
+				
+				if(path.size() > 4)
+					value -= 15;
 				
 				for(int j=0; j<3; j++){
 					if(j != id) {
