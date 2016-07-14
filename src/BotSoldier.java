@@ -37,6 +37,10 @@ public int getNodeValue(Node node){
 			
 			if(node.value != 4){
 				
+				if(node.value == board.getWinnerID()){
+					value += 30;
+				}
+				
 				value += 20 - path.size();
 				
 				for(int j=0; j<3; j++){

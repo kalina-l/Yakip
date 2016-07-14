@@ -63,6 +63,10 @@ public class BotScout extends Bot{
 			
 			value += 15;
 			
+			if(node.value == board.getWinnerID()){
+				value += 10;
+			}
+			
 			for(Node neighbor : board.getSideNeighbours(node)) {
 				if(neighbor.isWall())
 					value += 15;

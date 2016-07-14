@@ -6,9 +6,13 @@ public class Board {
 	
 	public Node[][] board;
 	
+	public int[] playerScore;
+	
 	public Board(NetworkClient network){
 		
 		board = new Node[32][32];
+		playerScore = new int[4];
+		
 		
 		for(int x=0; x<32; x++){
 			for(int y=0; y<32;y++){
@@ -51,8 +55,29 @@ public class Board {
     }
 	
 	public void UpdateBoard(int x, int y, byte playerID){
+		
+		if(board[x][y].value < 4)
+		{
+			playerScore[board[x][y].value]--;
+		}
+		
+		playerScore[playerID]++;
+		
 		board[x][y].value = playerID;
 	}
 	
-	
+	public int getWinnerID(){
+		
+		int bestScore = -100;
+		int bestIndex = 0;
+		
+		for(int i=0; i < playerScore.length; i++){
+			if(playerScore[i] > bestScore){
+				bestScore = playerScore[i];
+				bestIndex = i;
+			}
+		}
+		
+		return bestIndex;
+	}
 }
