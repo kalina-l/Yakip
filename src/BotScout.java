@@ -1,8 +1,8 @@
 
 public class BotScout extends Bot{
 
-	public BotScout(){
-		super();
+	public BotScout(int playerID){
+		super(playerID);
 		id = 0;
 	}
 	

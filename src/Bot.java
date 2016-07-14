@@ -9,13 +9,15 @@ public class Bot {
 	public int id;
 	public float x;
 	public float y;
+	int playerID;
 	
 	public ArrayList<Node> getPath(){
 		return path;
 	}
 	
-	public Bot(){
+	public Bot(int playerID){
 		path = new ArrayList<Node>();
+		this.playerID = playerID;
 	}
 	
 	public void findPath(Board board){
@@ -54,12 +56,6 @@ public class Bot {
 							int xPos = i*fieldWidth/2 + x;
 							int yPos = j*fieldWidth/2 + y;
 							
-							int smth;
-							if(xPos >= field[0].length) {
-								smth = 0;
-							}
-							smth = 1;
-							
 							tempField[x][y] = field[xPos][yPos];
 							tempValue += getNodeValue(field[xPos][yPos]);
 						}
@@ -78,14 +74,18 @@ public class Bot {
 	
 	private int getNodeValue(Node node){
 		
+		if(this instanceof BotTank){
+			return ((BotTank)this).getNodeValue(node);
+		}
+		
 		int value = 0;
 		
 		if(node.isWall()){
 			value -= 5;
 		}
 		
-		//TODO if(node.unreachable)
-		//		return -99;
+		if(node.unreachable)
+			return -99;
 		
 		//override this
 		return value;
