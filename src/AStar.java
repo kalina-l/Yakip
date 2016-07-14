@@ -37,6 +37,7 @@ public final class AStar {
 				}
 			}
 		}
+		if(startNode != targetNode) targetNode.unreachable = true;
 		return new ArrayList<Node>();
 	}
 

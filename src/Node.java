@@ -12,6 +12,7 @@ public class Node implements Comparable<Node>, IHeapItem<Node>{
 	public int hCost;
 	public Node parentNode;
 	private int heapIndex;
+	public boolean unreachable;
 	
 	public Node(int x, int y, int value){
 		this.x = x;
