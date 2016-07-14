@@ -10,7 +10,7 @@ public class BotTank extends Bot {
 	
 	public void findPath(Board board){
 		this.board = board;
-		super.findPath(board);
+		super.findPath(board, true);
 	}
 	
 	public int getNodeValue(Node node){
@@ -41,16 +41,20 @@ public class BotTank extends Bot {
 		return value;
 	}
 	
-//	public float[] move(Board board){
-//		float[] direction = super.move(board);
-//		//System.out.println("B: " + direction[0] + ", " + direction[1]);
-//		if(Math.abs(direction[0]) > Math.abs(direction[1])){	// x-Axis
-//			direction[1] = getPath().get(0).y + 0.9f - y;
-//		}
-//		else{	// y-Axis
-//			direction[0] = getPath().get(0).x + 0.9f - x;;
-//		}
-//		System.out.println("X: " + x + ", Y: " + y);
-//		return direction;
-//	}
+	public float[] move(Board board){
+		float[] direction = new float[2];
+		
+		if (getPath().isEmpty()) {
+			this.findPath(board);
+		}
+		else{
+			direction[0] = getPath().get(0).x + 0.5f - x;
+			direction[1] = getPath().get(0).y + 0.5f - y;
+
+			if (getPath().get(0).x == (int) x && getPath().get(0).y == (int) y) {
+				getPath().remove(0);
+			}
+		}
+		return direction;
+	}
 }
