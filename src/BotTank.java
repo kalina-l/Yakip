@@ -39,6 +39,10 @@ public class BotTank extends Bot {
 				if(neighbor.isWall())
 					value -= 5;
 			}
+		
+			if(node.y == (int)y){
+				value += 15;
+			}
 			
 			for(int i=0; i<4; i++) {
 				if(i != playerID) {

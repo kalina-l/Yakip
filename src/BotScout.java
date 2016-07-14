@@ -43,7 +43,7 @@ public class BotScout extends Bot{
 		
 		int value = 0;
 		
-		if(Math.abs(node.x - (int)x) > 12 || Math.abs(node.y - (int)y) > 12)
+		if(Math.abs(node.x - (int)x) > 6 || Math.abs(node.y - (int)y) > 6)
 			value -= 10;
 		
 		
@@ -59,14 +59,14 @@ public class BotScout extends Bot{
 			
 			for(Node neighbor : board.getSideNeighbours(node)) {
 				if(neighbor.isWall())
-					value += 5;
+					value += 15;
 			}
 			
 			for(int i=0; i<4; i++) {
 				if(i != playerID) {
 					for(int j=0; j<3; j++){
 						if((int)network.getX(i, j) == node.x && (int)network.getY(i, j) == node.y){
-							value -= 10;
+							value -= 30;
 						}
 					}
 				}
