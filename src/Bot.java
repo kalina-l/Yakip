@@ -78,6 +78,14 @@ public class Bot {
 			return ((BotTank)this).getNodeValue(node);
 		}
 		
+		if(this instanceof BotSoldier){
+			return ((BotSoldier)this).getNodeValue(node);
+		}
+		
+		//if(this instanceof BotScout){
+		//	return ((BotScout)this).getNodeValue(node);
+		//}
+		
 		int value = 0;
 		
 		if(node.isWall()){

@@ -17,7 +17,6 @@ public int getNodeValue(Node node){
 		if(Math.abs(node.x - (int)x) > 16 || Math.abs(node.y - (int)y) > 16)
 			value -= 10;
 		
-		
 		if(node.unreachable) {
 			return -99;
 		}
@@ -26,10 +25,14 @@ public int getNodeValue(Node node){
 		} 
 		else if(node.value != playerID){
 			
-			value += 15;
+			value += 10;
 			
 			if(node.value != 4){
-				value += 15;
+				value += 5;
+				
+				if(Math.abs(node.x - (int)x) < 4 || Math.abs(node.y - (int)y) > 4) {
+					value += 15;
+				}
 			}
 		}
 		
