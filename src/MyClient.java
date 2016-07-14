@@ -16,9 +16,9 @@ public class MyClient {
 		myPlayerNumber = network.getMyPlayerNumber();
 		
 		ArrayList<Bot> bots = new ArrayList<>();
-		bots.add(new BotScout());
-		bots.add(new BotSoldier());
-		bots.add(new BotTank());
+		bots.add(new BotScout(myPlayerNumber));
+		bots.add(new BotSoldier(myPlayerNumber));
+		bots.add(new BotTank(myPlayerNumber));
 		
 
 		while (network.isAlive()) {
@@ -33,10 +33,10 @@ public class MyClient {
 					currBot.findPath(board);
 				}
 				else{
-					float xDir = currBot.getPath().get(0).x - currBot.x;
-					float yDir = currBot.getPath().get(0).y - currBot.y;
-					network.setMoveDirection(0, xDir, yDir);
-					if (currBot.getPath().get(0).x == currBot.x && currBot.getPath().get(0).y == currBot.y) {
+					float xDir = currBot.getPath().get(0).x + 0.5f - currBot.x;
+					float yDir = currBot.getPath().get(0).y + 0.5f - currBot.y;
+					network.setMoveDirection(currBot.id, xDir, yDir);
+					if (currBot.getPath().get(0).x + 0.5f == currBot.x && currBot.getPath().get(0).y == currBot.y) {
 						currBot.getPath().remove(0);
 					}
 				}

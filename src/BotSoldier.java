@@ -1,8 +1,8 @@
 
 public class BotSoldier extends Bot{
 
-	public BotSoldier(){
-		super();
+	public BotSoldier(int playerID){
+		super(playerID);
 		id = 1;
 	}
 	
