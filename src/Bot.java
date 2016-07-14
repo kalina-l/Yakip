@@ -22,13 +22,93 @@ public class Bot {
 		int xFull = (int) x;
 		int yFull = (int) y;
 		
-		Node dest = findDestination(board);
+		path.clear();
 		
-		path = AStar.findPath(board, board.board[xFull][yFull],
-				board.board[dest.x][dest.y]);
+		while(path.size() == 0)
+		{
+			Node dest = findDestination(board);
+			
+			AStar.findPath(board, board.board[xFull][yFull],
+					board.board[dest.x][dest.y]);
+		}
 	}
 	
+	private Node[][] getBestField(Node[][] field)
+	{
+		int fieldWidth = field[0].length / 2;
+		
+		if(fieldWidth < 2) {
+			return field;
+		} else {
+			int bestValue = -9999;
+			
+			Node[][] bestField =  new Node[fieldWidth][fieldWidth];
+			
+			for(int i=0; i<3; i++) {
+				for(int j=0; j<3; j++) {
+					Node[][] tempField = new Node[fieldWidth][fieldWidth];
+					int tempValue = 0;
+					
+					for(int x=0; x<fieldWidth; x++){
+						for(int y=0; y<fieldWidth;x++){
+							int xPos = i*fieldWidth/2 + x;
+							int yPos = j*fieldWidth/2 + y;
+							
+							tempField[x][y] = field[xPos][yPos];
+							tempValue += getNodeValue(field[xPos][yPos]);
+						}
+					}
+					
+					if(tempValue > bestValue){
+						bestField = tempField;
+						bestValue = tempValue;
+					}
+				}
+			}
+			
+			return getBestField(bestField);
+		}
+	}
+	
+	private int getNodeValue(Node node){
+		
+		int value = 0;
+		
+		if(node.isWall()){
+			value -= 5;
+		}
+		
+		//TODO if(node.unreachable)
+		//		return -99;
+		
+		//override this
+		return value;
+	}
+	
+	
 	private Node findDestination(Board board){
+		
+		Node bestNode = null;
+		int bestNodeValue = 0;
+		
+		Node[][] bestField = getBestField(board.board);
+		
+		for(int x=0; x<bestField[0].length; x++){
+			for(int y=0; y<bestField[1].length; y++){
+				if(!bestField[x][y].isWall()){
+					int tempValue = getNodeValue(bestField[x][y]);
+					
+					if(tempValue > bestNodeValue){
+						bestNodeValue = tempValue;
+						bestNode = bestField[x][y];
+					}
+				}
+			}
+		}
+		
+		return bestNode;
+		
+		/*
 		Random rnd = new Random();
 		int randomWalkableX = rnd.nextInt(17);
 		int randomWalkableY = rnd.nextInt(17);
@@ -39,6 +119,7 @@ public class Bot {
 		randomWalkableX += 5;
 		randomWalkableY += 5;
 		return board.board[randomWalkableX][randomWalkableY];
+		*/
 	}
 	
 	public void updatePosition(NetworkClient network, int myPlayerNumber){
