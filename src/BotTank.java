@@ -28,4 +28,17 @@ public class BotTank extends Bot {
 		//override this
 		return value;
 	}
+	
+//	public float[] move(Board board){
+//		float[] direction = super.move(board);
+//		//System.out.println("B: " + direction[0] + ", " + direction[1]);
+//		if(Math.abs(direction[0]) > Math.abs(direction[1])){	// x-Axis
+//			direction[1] = getPath().get(0).y + 0.9f - y;
+//		}
+//		else{	// y-Axis
+//			direction[0] = getPath().get(0).x + 0.9f - x;;
+//		}
+//		System.out.println("X: " + x + ", Y: " + y);
+//		return direction;
+//	}
 }

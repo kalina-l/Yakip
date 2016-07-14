@@ -10,6 +10,7 @@ public class Bot {
 	public float x;
 	public float y;
 	int playerID;
+	public Node finalDest;
 	
 	public ArrayList<Node> getPath(){
 		return path;
@@ -112,6 +113,7 @@ public class Bot {
 			}
 		}
 		
+		finalDest = bestNode;
 		return bestNode;
 		
 		/*
@@ -128,9 +130,26 @@ public class Bot {
 		*/
 	}
 	
-	public int[] move(){
-		int[] direction = new int[2];
+	public float[] move(Board board){
+		float[] direction = new float[2];
+		// TODO Tank soll immer an der Seitenkante seines Pfades laufen
+		// TODO Scout soll immer warten
+		// Rest läuft einfach mittig
 		
+		if (getPath().isEmpty()) {
+			if(this instanceof BotScout){
+				((BotScout)this).findPath(board);
+			}
+			else findPath(board);
+		}
+		else{
+			direction[0] = path.get(0).x + 0.5f - x;
+			direction[1] = path.get(0).y + 0.5f - y;
+
+			if (path.get(0).x == (int) x && path.get(0).y == (int) y) {
+				path.remove(0);
+			}
+		}
 		return direction;
 	}
 	
