@@ -56,12 +56,12 @@ public class Bot {
 					Node[][] tempField = new Node[fieldWidth][fieldWidth];
 					int tempValue = 0;
 					
-					for(int x=0; x<fieldWidth; x++){
-						for(int y=0; y<fieldWidth;y++){
-							int xPos = i*fieldWidth/2 + x;
-							int yPos = j*fieldWidth/2 + y;
+					for(int xi=0; xi<fieldWidth; xi++){
+						for(int yi=0; yi<fieldWidth;yi++){
+							int xPos = i*fieldWidth/2 + xi;
+							int yPos = j*fieldWidth/2 + yi;
 							
-							tempField[x][y] = field[xPos][yPos];
+							tempField[xi][yi] = field[xPos][yPos];
 							tempValue += getNodeValue(field[xPos][yPos]);
 						}
 					}
@@ -114,7 +114,7 @@ public class Bot {
 		
 		for(int x=0; x<bestField[0].length; x++){
 			for(int y=0; y<bestField[1].length; y++){
-				if(!bestField[x][y].isWall()){
+				if(!bestField[x][y].isWall() && !bestField[x][y].unreachable){
 					int tempValue = getNodeValue(bestField[x][y]);
 					
 					if(tempValue > bestNodeValue){

@@ -25,28 +25,36 @@ public int getNodeValue(Node node){
 		
 		
 		if(node.unreachable) {
-			return -99;
+			return -40;
 		}
 		else if(node.isWall()) {
-			//value -= 15;
+			value -= 5;
 		} 
 		else if(node.value != playerID){
 			
-			value += 10;
+			ArrayList<Node> path = AStar.findPath(board, board.board[(int)x][(int)y],
+					board.board[node.x][node.y], false);
 			
 			if(node.value != 4){
-				value += 5;
 				
-				ArrayList<Node> path = AStar.findPath(board, board.board[(int)x][(int)y],
-						board.board[node.x][node.y], false);
-				
-				if(path.size() > 4)
-					value -= 15;
+				value += 20 - path.size();
 				
 				for(int j=0; j<3; j++){
 					if(j != id) {
 						if((int)network.getX(playerID, j) == node.x && (int)network.getY(playerID, j) == node.y){
 							value -= 10;
+						}
+					}
+				}
+			}
+			else
+			{
+				value += 10 - path.size();
+				
+				for(int j=0; j<3; j++){
+					if(j != id) {
+						if((int)network.getX(playerID, j) == node.x && (int)network.getY(playerID, j) == node.y){
+							value -= 20;
 						}
 					}
 				}
