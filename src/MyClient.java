@@ -16,10 +16,10 @@ public class MyClient {
 		myPlayerNumber = network.getMyPlayerNumber();
 		
 		ArrayList<Bot> bots = new ArrayList<>();
-		BotScout botScout = new BotScout(myPlayerNumber);
+		BotScout botScout = new BotScout(myPlayerNumber, network);
 		bots.add(botScout);
-		bots.add(new BotSoldier(myPlayerNumber));
-		bots.add(new BotTank(myPlayerNumber));
+		bots.add(new BotSoldier(myPlayerNumber, network));
+		bots.add(new BotTank(myPlayerNumber, network));
 		
 
 		while (network.isAlive()) {
