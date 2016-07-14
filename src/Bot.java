@@ -21,17 +21,22 @@ public class Bot {
 		int xFull = (int) x;
 		int yFull = (int) y;
 		
-		Node dest = findDestination(board);
+		path.clear();
 		
-		AStar.findPath(board, board.board[xFull][yFull],
-				board.board[dest.x][dest.y]);
+		while(path.size() == 0)
+		{
+			Node dest = findDestination(board);
+			
+			AStar.findPath(board, board.board[xFull][yFull],
+					board.board[dest.x][dest.y]);
+		}
 	}
 	
 	private Node[][] getBestField(Node[][] field)
 	{
 		int fieldWidth = field[0].length / 2;
 		
-		if(fieldWidth < 4) {
+		if(fieldWidth < 2) {
 			return field;
 		} else {
 			int bestValue = -9999;
@@ -71,6 +76,9 @@ public class Bot {
 		if(node.isWall()){
 			value -= 5;
 		}
+		
+		//TODO if(node.unreachable)
+		//		return -99;
 		
 		//override this
 		return value;
