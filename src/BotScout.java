@@ -43,7 +43,7 @@ public class BotScout extends Bot{
 		
 		int value = 0;
 		
-		if(Math.abs(node.x - (int)x) > 20 || Math.abs(node.y - (int)y) > 20)
+		if(Math.abs(node.x - (int)x) > 12 || Math.abs(node.y - (int)y) > 12)
 			value -= 10;
 		
 		

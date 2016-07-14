@@ -20,7 +20,7 @@ public int getNodeValue(Node node){
 		
 		int value = 0;
 		
-		if(Math.abs(node.x - (int)x) > 16 || Math.abs(node.y - (int)y) > 16)
+		if(Math.abs(node.x - (int)x) > 9 || Math.abs(node.y - (int)y) > 9)
 			value -= 10;
 		
 		if(node.unreachable) {

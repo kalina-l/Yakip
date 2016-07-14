@@ -23,7 +23,7 @@ public class BotTank extends Bot {
 		
 		int value = 0;
 		
-		if(Math.abs(node.x - (int)x) > 10 || Math.abs(node.y - (int)y) > 10)
+		if(Math.abs(node.x - (int)x) > 6 || Math.abs(node.y - (int)y) > 6)
 			value -= 10;
 		
 		if(node.unreachable){
